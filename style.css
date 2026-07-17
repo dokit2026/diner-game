@@ -1,0 +1,557 @@
+/* =========================
+   全体設定
+========================= */
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #250707;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: "DotGothic16", monospace;
+  color: #fff;
+  user-select: none;
+}
+
+/* 全部ドット文字にする */
+button,
+.status-box,
+.detail-money,
+.detail-name,
+.detail-price,
+.detail-desc,
+.eat-hint,
+.message,
+.result-card,
+.restart-button {
+  font-family: "DotGothic16", monospace;
+}
+
+/* =========================
+   ゲーム画面
+========================= */
+
+.game-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game {
+  position: relative;
+  width: min(100vw, 960px);
+  aspect-ratio: 4 / 3;
+  background: #000;
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+
+.scene-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =========================
+   共通レイヤー
+========================= */
+
+.screen-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
+/* =========================
+   ステータスバー
+========================= */
+
+.status-bar {
+  position: absolute;
+  top: 3.5%;
+  left: 4%;
+  right: 4%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.status-box {
+  min-width: 110px;
+  padding: 8px 14px;
+  background: #000;
+  border: 3px solid #fff;
+  color: #fff;
+  font-size: clamp(14px, 2.2vw, 24px);
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* =========================
+   スタート画面
+========================= */
+
+.start-button {
+  position: absolute;
+  left: 31%;
+  top: 47%;
+  width: 32%;
+  height: 28%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* =========================
+   メニュー画面のタップ範囲
+========================= */
+
+.menu-item {
+  position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* タップ範囲を確認したい時だけON */
+/*
+.menu-item,
+.start-button,
+.eat-button {
+  background: rgba(255, 0, 0, 0.25);
+}
+*/
+
+.menu-item span {
+  display: none;
+}
+
+/* 左ページ */
+.menu-hamburger {
+  left: 23%;
+  top: 20%;
+  width: 22%;
+  height: 12%;
+}
+
+.menu-hotdog {
+  left: 23%;
+  top: 36%;
+  width: 22%;
+  height: 12%;
+}
+
+.menu-omelet {
+  left: 23%;
+  top: 52%;
+  width: 22%;
+  height: 12%;
+}
+
+/* 右ページ */
+.menu-milkshake {
+  left: 57%;
+  top: 16%;
+  width: 22%;
+  height: 12%;
+}
+
+.menu-creamsoda {
+  left: 57%;
+  top: 31%;
+  width: 22%;
+  height: 12%;
+}
+
+.menu-coffee {
+  left: 57%;
+  top: 45%;
+  width: 22%;
+  height: 11%;
+}
+
+.menu-pancake {
+  left: 57%;
+  top: 59%;
+  width: 22%;
+  height: 11%;
+}
+
+.menu-salad {
+  left: 57%;
+  top: 73%;
+  width: 22%;
+  height: 11%;
+}
+
+/* =========================
+   商品詳細モーダル
+========================= */
+
+.modal {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-card {
+  position: relative;
+  width: 74%;
+  min-height: 46%;
+  background: #1d704f;
+  border: 5px solid #fff;
+  border-radius: 32px;
+  padding: 6% 5% 12%;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.45);
+}
+
+.detail-money {
+  position: absolute;
+  right: 2%;
+  top: -26%;
+  min-width: 150px;
+  padding: 8px 18px;
+  background: #000;
+  border: 3px solid #fff;
+  color: #fff;
+  font-size: clamp(22px, 4vw, 42px);
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.detail-content {
+  display: flex;
+  align-items: center;
+  gap: 7%;
+}
+
+.detail-image-area {
+  width: 36%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.detail-image {
+  width: 100%;
+  max-height: 190px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  transition: transform 0.15s ease;
+}
+
+.detail-text-area {
+  flex: 1;
+}
+
+.detail-name {
+  display: inline-block;
+  min-width: 78%;
+  margin: 0 0 18px;
+  padding: 10px 18px;
+  background: #f8f8f8;
+  color: #23684e;
+  font-size: clamp(28px, 4.8vw, 56px);
+  font-weight: normal;
+  line-height: 1.1;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.detail-price {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: clamp(24px, 4.2vw, 44px);
+}
+
+.detail-desc {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(18px, 3.2vw, 34px);
+  line-height: 1.35;
+  white-space: pre-line;
+}
+
+/* =========================
+   詳細画面ボタン
+========================= */
+
+.detail-buttons {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10%;
+}
+
+.detail-button {
+  flex: 1;
+  border: 4px solid #fff;
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-size: clamp(20px, 3.8vw, 40px);
+  cursor: pointer;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.35);
+}
+
+.back-button {
+  background: #000;
+  color: #fff;
+}
+
+.buy-button {
+  background: #d90000;
+  color: #111;
+}
+
+.detail-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+   食べる画面
+========================= */
+
+.food-on-table {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  width: 34%;
+  max-height: 38%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  image-rendering: pixelated;
+  z-index: 8;
+}
+
+/* 調味料 */
+.seasoning-area {
+  position: absolute;
+  right: 5%;
+  bottom: 8%;
+  display: flex;
+  gap: 12px;
+  z-index: 15;
+}
+
+.seasoning-button {
+  width: clamp(48px, 8vw, 78px);
+  height: clamp(48px, 8vw, 78px);
+  border: 3px solid #fff;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.seasoning-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.seasoning-button.used {
+  opacity: 0.45;
+  transform: translateY(4px);
+}
+
+/* 食べるタップ範囲 */
+.eat-button {
+  position: absolute;
+  left: 28%;
+  top: 22%;
+  width: 44%;
+  height: 48%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 12;
+}
+
+/* TAP TO EAT */
+.eat-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 7%;
+  transform: translateX(-50%);
+  z-index: 14;
+  padding: 8px 18px;
+  background: rgba(0, 0, 0, 0.82);
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: clamp(15px, 2.8vw, 28px);
+  letter-spacing: 2px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0.35;
+  }
+}
+
+/* =========================
+   メッセージ
+========================= */
+
+.message {
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  transform: translateX(-50%);
+  z-index: 60;
+  max-width: 86%;
+  padding: 12px 18px;
+  background: rgba(0, 0, 0, 0.88);
+  border: 3px solid #fff;
+  color: #fff;
+  font-size: clamp(14px, 2.4vw, 24px);
+  text-align: center;
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+/* =========================
+   結果画面
+========================= */
+
+.result-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-card {
+  width: 70%;
+  padding: 36px 28px;
+  background: rgba(0, 0, 0, 0.88);
+  border: 5px solid #fff;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.result-card h1 {
+  margin: 0 0 20px;
+  font-size: clamp(30px, 6vw, 64px);
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+
+.result-card p {
+  margin: 8px 0;
+  font-size: clamp(16px, 3vw, 30px);
+}
+
+.result-score {
+  margin: 20px 0 26px;
+}
+
+.restart-button {
+  padding: 12px 28px;
+  background: #d90000;
+  border: 4px solid #fff;
+  border-radius: 999px;
+  color: #111;
+  font-size: clamp(18px, 3vw, 32px);
+  cursor: pointer;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.4);
+}
+
+.restart-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* =========================
+   スマホ調整
+========================= */
+
+@media (max-width: 600px) {
+  .game {
+    width: 100vw;
+  }
+
+  .status-box {
+    min-width: 88px;
+    padding: 6px 10px;
+  }
+
+  .detail-card {
+    width: 82%;
+    border-radius: 24px;
+    padding: 7% 5% 15%;
+  }
+
+  .detail-money {
+    top: -22%;
+    min-width: 110px;
+  }
+
+  .detail-content {
+    gap: 4%;
+  }
+
+  .detail-image-area {
+    width: 34%;
+  }
+
+  .detail-name {
+    min-width: 78%;
+    padding: 6px 10px;
+  }
+
+  .detail-buttons {
+    gap: 8%;
+  }
+
+  .food-on-table {
+    width: 40%;
+  }
+
+  .seasoning-area {
+    right: 4%;
+    bottom: 6%;
+  }
+}

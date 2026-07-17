@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no"
+  />
+
+  <title>Diner $30 Challenge</title>
+
+  <!-- ドット文字フォント -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- CSS読み込み -->
+  <link rel="stylesheet" href="./style.css?v=new001" />
+</head>
+
+<body>
+  <main class="game-wrapper">
+    <section class="game" id="game">
+
+      <!-- 背景画像 -->
+      <img
+        id="sceneImage"
+        class="scene-image"
+        src="./images/start.png"
+        alt="ダイナーゲーム画面"
+      />
+
+      <!-- 所持金・満腹度 -->
+      <div class="status-bar" id="statusBar">
+        <div class="status-box" id="moneyText">$30</div>
+        <div class="status-box" id="fullnessText">FULL 0%</div>
+      </div>
+
+      <!-- START画面 -->
+      <div class="screen-layer" id="startLayer">
+        <button
+          class="start-button"
+          id="startButton"
+          aria-label="メニューを開く"
+        ></button>
+      </div>
+
+      <!-- メニュー画面 -->
+      <div class="screen-layer hidden" id="menuLayer">
+        <button class="menu-item menu-hamburger" data-item="hamburger">
+          <span>Hamburger</span>
+        </button>
+
+        <button class="menu-item menu-hotdog" data-item="hotdog">
+          <span>Hot-dog</span>
+        </button>
+
+        <button class="menu-item menu-omelet" data-item="omelet">
+          <span>Omelet</span>
+        </button>
+
+        <button class="menu-item menu-milkshake" data-item="milkshake">
+          <span>Milkshake</span>
+        </button>
+
+        <button class="menu-item menu-creamsoda" data-item="creamsoda">
+          <span>Cream soda</span>
+        </button>
+
+        <button class="menu-item menu-coffee" data-item="coffee">
+          <span>Coffee</span>
+        </button>
+
+        <button class="menu-item menu-pancake" data-item="pancake">
+          <span>Pancake</span>
+        </button>
+
+        <button class="menu-item menu-salad" data-item="salad">
+          <span>Salad</span>
+        </button>
+      </div>
+
+      <!-- 商品詳細画面 -->
+      <div class="modal hidden" id="detailModal">
+        <div class="detail-card">
+
+          <!-- 詳細画面の所持金 -->
+          <div class="detail-money" id="detailMoney">$30</div>
+
+          <div class="detail-content">
+            <!-- 商品画像 -->
+            <div class="detail-image-area">
+              <img
+                id="detailImage"
+                class="detail-image"
+                src="./images/hamburger.png"
+                alt=""
+              />
+            </div>
+
+            <!-- 商品テキスト -->
+            <div class="detail-text-area">
+              <h1 class="detail-name" id="detailName">Hamburger</h1>
+              <p class="detail-price" id="detailPrice">$8</p>
+              <p class="detail-desc" id="detailDesc">ケチャップ付き</p>
+            </div>
+          </div>
+
+          <!-- 戻る・決定ボタン -->
+          <div class="detail-buttons">
+            <button class="detail-button back-button" id="detailBackButton">
+              ←戻る
+            </button>
+
+            <button class="detail-button buy-button" id="buyButton">
+              決定
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 食べる画面 -->
+      <div class="screen-layer hidden" id="eatLayer">
+
+        <!-- テーブルに出る料理 -->
+        <img
+          id="foodOnTable"
+          class="food-on-table"
+          src=""
+          alt=""
+        />
+
+        <!-- 調味料 -->
+        <div class="seasoning-area" id="seasoningArea">
+          <button class="seasoning-button" id="saltButton" aria-label="塩をかける">
+            <img src="./images/salt.png" alt="salt" />
+          </button>
+
+          <button class="seasoning-button" id="sauceButton" aria-label="ソースをかける">
+            <img src="./images/sauce.png" alt="sauce" />
+          </button>
+        </div>
+
+        <!-- 食べる用タップエリア -->
+        <button
+          class="eat-button"
+          id="eatButton"
+          aria-label="料理を食べる"
+        ></button>
+
+        <div class="eat-hint" id="eatHint">
+          TAP TO EAT
+        </div>
+      </div>
+
+      <!-- メッセージ表示 -->
+      <div class="message hidden" id="message">
+        メッセージ
+      </div>
+
+      <!-- 結果画面 -->
+      <div class="result-layer hidden" id="resultLayer">
+        <div class="result-card">
+          <h1 id="resultTitle">GAME CLEAR</h1>
+
+          <p id="resultText">
+            おなかいっぱい！
+          </p>
+
+          <div class="result-score">
+            <p id="resultMoney">残金 $0</p>
+            <p id="resultFullness">満腹度 100%</p>
+          </div>
+
+          <button class="restart-button" id="restartButton">
+            PLAY AGAIN
+          </button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- JavaScript読み込み -->
+  <script src="./script.js?v=new001"></script>
+</body>
+</html>
