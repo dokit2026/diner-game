@@ -595,65 +595,47 @@ function eatCurrentFood() {
 }
 
 function finishEating() {
-
   const seasoningResult = getSeasoningBonus(currentOrder.key);
 
-  let gain = currentOrder.fullness + seasoningResult.bonus;
+  const foodGain = currentOrder.fullness;
+  const seasoningBonus = seasoningResult.bonus;
 
-  gain = Math.max(0, gain);
-
-  fullness = clampFullness(fullness + gain);
+  fullness = clampFullness(fullness + foodGain);
+  fullness = clampFullness(fullness + seasoningBonus);
 
   orderHistory.push(currentOrder.key);
 
-  let text = `${currentOrder.name} を食べた！\nFULL +${gain}`;
+  let text = `${currentOrder.name} を食べた！\nFULL +${foodGain}`;
 
   if (seasoningResult.notes.length > 0) {
-
     text += `\n${seasoningResult.notes.join("\n")}`;
-
   }
 
   if (currentOrder.isBurnt) {
-
     burntPancakeCount++;
-
     text += "\n焦げてたけど食べた…";
-
   }
 
   const secretText = checkSecrets();
 
   if (secretText) {
-
     text += `\n${secretText}`;
-
   }
 
   updateStatus();
-
   showMessage(text, 2300);
 
   const result = getGameResult();
 
   if (result) {
-
     setTimeout(() => {
-
       showResult(result);
-
     }, 1200);
-
   } else {
-
     setTimeout(() => {
-
       returnToMenu();
-
     }, 1200);
-
   }
-
 }
 
 function returnToMenu() {
